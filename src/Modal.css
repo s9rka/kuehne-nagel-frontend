@@ -1,0 +1,22 @@
+
+.shipment-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    
+}
+
+#chakra-modal-mymodal {
+    max-width: calc(100vw - 50px);
+}
+
+#modalfoot {
+    display: flex;
+    justify-content: space-between;
+}
