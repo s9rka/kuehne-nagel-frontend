@@ -14,11 +14,17 @@ import {
   } from '@chakra-ui/react';
 import './Table.css';
 import ModalWindow from './Modal';
+import shipmentsData from "./assets/Shipments";
+import { Link } from 'react-router-dom';
+import EditData from './Edit';
 
 function TableData() {
-    const dbUrl = "https://my.api.mockaroo.com/shipments.json?key=5e0b62d0";
+
     const [stored, setStored] = useState([]);
 
+    /* FOR GETTING DATA FROM URL
+    const dbUrl = "https://my.api.mockaroo.com/shipments.json?key=5e0b62d0";
+    
     useEffect(() => {
         fetch(dbUrl).then(response => response.json())
         .then(responseBody => {
@@ -29,10 +35,13 @@ function TableData() {
             setStored(dataFromDb);
         })
     }, []);
+    */
+
 
     function deleteRow(selectedRow) {
-        const index = stored.findIndex(element => element.orderNo === selectedRow.orderNo);
-        stored.splice(index,1);
+        setStored(shipmentsData);
+        const index = shipmentsData.findIndex(element => element.orderNo === selectedRow.orderNo);
+        shipmentsData.splice(index,1);
         setStored(stored.slice());
     }
     
@@ -53,7 +62,7 @@ function TableData() {
                 </Tr>
             </Thead>
             <Tbody>
-            { stored.map(element => 
+            { shipmentsData.map(element => 
                 <Tr>
                     <Td>{element.orderNo}</Td>
                     <Td>{element.date}</Td>
@@ -70,7 +79,7 @@ function TableData() {
                         status = {element.status}
                         consignee = {element.consignee}
                         />
-                        <Button onClick={() => deleteRow(element)} variant='outline' colorScheme='red'><img src={trashicon}></img></Button>
+                        <Button onClick={() => deleteRow(element)} variant='outline' colorScheme='red'><img src={trashicon} alt="trash-icon"></img></Button>
                     </Td>
                 </Tr>)}
             </Tbody>
