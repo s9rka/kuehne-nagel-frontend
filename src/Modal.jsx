@@ -1,5 +1,5 @@
-import { useDisclosure, EditableControls, useEditableControls, Spacer } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useDisclosure, useEditableControls, Spacer } from '@chakra-ui/react'
+import React from 'react'
 import {
     Button,
     Modal,
@@ -12,12 +12,10 @@ import {
     Badge,
     Editable,
     EditableInput,
-    EditableTextarea,
     EditablePreview,
     Input,
     ButtonGroup,
     IconButton,
-    Flex,
   } from '@chakra-ui/react';
 
 import {
@@ -25,14 +23,10 @@ import {
     CloseIcon,
     EditIcon,
   } from '@chakra-ui/icons';
-
 import './Modal.css';
-import { useRef } from 'react';
-import shipmentsData from "./assets/Shipments";
 
 function ModalWindow(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const consigneeRef = useRef();
 
     function EditableControls() {
         const {
@@ -55,7 +49,7 @@ function ModalWindow(props) {
     
   return (
     <div>
-        <Button onClick={onOpen}>Open Panel</Button>
+        <IconButton aria-label='Search database' icon={<EditIcon />} onClick={onOpen}/>
         <Modal id='mymodal' isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent width='1000px'>
@@ -63,40 +57,90 @@ function ModalWindow(props) {
             
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <div className="shipment-details">
-                <div className="field">Order Number
-                    <Badge fontSize='1rem'>{props.orderNo}</Badge>
+          <ModalBody>                           {/* Fields can be edited in the UI, but the values are not saved */}
+            <div className="shipment-details"> 
+                <div className="field"><label>Order Number</label> 
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.orderNo}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>
                 </div>
 
-                <div className="field">Date
-                    <Badge fontSize='1rem'>{props.date}</Badge>
+                <div className="field"><label>Date</label>
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.date}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>                
                 </div>
 
-                <div className="field">Customer
-                    <Badge fontSize='1rem'>{props.customer}</Badge>
+                <div className="field"><label>Customer</label>
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.customer}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>
                 </div>
 
-                <div className="field">Tracking Number
-                    <Badge fontSize='1rem'>{props.trackingNo}</Badge>
+                <div className="field"><label>Tracking Number</label>
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.trackingNo}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>
                 </div>
 
-                <div className="field">Status
-                    <Badge fontSize='1rem'>{props.status}</Badge>
+                <div className="field"><label>Status</label>
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.status}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>
                 </div>
 
                 <div className="field"><label>Consignee</label>
-                <Editable
-                    padding='.2rem'
-                    fontWeight='bold'
-                    defaultValue={props.consignee}
-                    isPreviewFocusable={false}
-                >
-                <EditablePreview />
-                {/* Here is the custom input */}
-                <Input useRef={consigneeRef} as={EditableInput} />
-                <EditableControls />
-                </Editable>
+                    <Editable
+                        padding='.2rem'
+                        fontWeight='bold'
+                        defaultValue={props.consignee}
+                        isPreviewFocusable={false}
+                    >
+                    <EditablePreview />
+                    {/* Here is the custom input */}
+                    <Input as={EditableInput} />
+                    <EditableControls />
+                    </Editable>
                 </div>            
             </div>
             <div>

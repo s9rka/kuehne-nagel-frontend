@@ -11,16 +11,21 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    IconButton,
+    ButtonGroup,
   } from '@chakra-ui/react';
 import './Table.css';
 import ModalWindow from './Modal';
-import shipmentsData from "./assets/Shipments";
-import { Link } from 'react-router-dom';
-import EditData from './Edit';
+import shipmentsData from "./assets/shipments";
+import {
+    DeleteIcon,
+    EditIcon,
+  } from '@chakra-ui/icons';
+
 
 function TableData() {
 
-    const [stored, setStored] = useState([]);
+    const [stored, setStored] = useState(shipmentsData);
 
     /* FOR GETTING DATA FROM URL
     const dbUrl = "https://my.api.mockaroo.com/shipments.json?key=5e0b62d0";
@@ -37,7 +42,6 @@ function TableData() {
     }, []);
     */
 
-
     function deleteRow(selectedRow) {
         setStored(shipmentsData);
         const index = shipmentsData.findIndex(element => element.orderNo === selectedRow.orderNo);
@@ -53,23 +57,23 @@ function TableData() {
             <Thead className="table-head">
                 <Tr>
                     <Th>Order Number</Th>
-                    <Th>Date</Th>
-                    <Th>Customer</Th>
-                    <Th>Tracking Number</Th>
-                    <Th>Status</Th>
-                    <Th>Consignee</Th>
+                    <Th className="date">Date</Th>
+                    <Th className='customer'>Customer</Th>
+                    <Th className="less-important">Tracking Number</Th>
+                    <Th className="less-important">Status</Th>
+                    <Th className="less-important">Consignee</Th>
                     <Th>Actions</Th>
                 </Tr>
             </Thead>
             <Tbody>
-            { shipmentsData.map(element => 
+            { stored.map(element => 
                 <Tr>
                     <Td>{element.orderNo}</Td>
-                    <Td>{element.date}</Td>
-                    <Td>{element.customer}</Td>
-                    <Td>{element.trackingNo}</Td>
-                    <Td>{element.status}</Td>
-                    <Td>{element.consignee}</Td>
+                    <Td className="date">{element.date}</Td>
+                    <Td className="customer">{element.customer}</Td>
+                    <Td className="less-important">{element.trackingNo}</Td>
+                    <Td className="less-important">{element.status}</Td>
+                    <Td className="less-important">{element.consignee}</Td>
                     <Td className='actions'>
                         < ModalWindow 
                         orderNo = {element.orderNo}
@@ -79,7 +83,7 @@ function TableData() {
                         status = {element.status}
                         consignee = {element.consignee}
                         />
-                        <Button onClick={() => deleteRow(element)} variant='outline' colorScheme='red'><img src={trashicon} alt="trash-icon"></img></Button>
+                        <IconButton aria-label='Search database' icon={<DeleteIcon />} onClick={() => deleteRow(element)} variant='outline' colorScheme='red'></IconButton>
                     </Td>
                 </Tr>)}
             </Tbody>

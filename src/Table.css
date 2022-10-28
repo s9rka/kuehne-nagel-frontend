@@ -8,3 +8,23 @@
     flex-direction: row;
     gap: 1rem;
 }
+
+
+/* For responsive design, I remove less important columns from the table view, all data can still be accessed by the edit button*/
+@media screen and (max-width: 1530px) {
+    .less-important {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .customer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .date {
+        display: none;
+    }
+}
