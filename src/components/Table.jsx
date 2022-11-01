@@ -1,51 +1,44 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import trashicon from './trashicon.svg';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Button,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-    IconButton,
-    ButtonGroup,
-  } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer, IconButton, } from '@chakra-ui/react';
 import './Table.css';
 import ModalWindow from './Modal';
-import shipmentsData from "./assets/shipments";
-import {
-    DeleteIcon,
-    EditIcon,
-  } from '@chakra-ui/icons';
+import shipmentsData from "../assets/shipments.json";
+import { DeleteIcon } from '@chakra-ui/icons';
+import axios from 'axios';
 
 
 function TableData() {
-
     const [stored, setStored] = useState(shipmentsData);
+    const dbUrl = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
 
-    /* FOR GETTING DATA FROM URL
-    const dbUrl = "https://my.api.mockaroo.com/shipments.json?key=5e0b62d0";
-    
-    useEffect(() => {
+    /*          // Getting data with fetch (commented out because of the URL overload) 
+    useEffect(() => {     
         fetch(dbUrl).then(response => response.json())
-        .then(responseBody => {
+        .then(response => {
             const dataFromDb = [];
-            for (const key in responseBody) {
-                dataFromDb.push(responseBody[key]);
+            for (const key in response) {
+                dataFromDb.push(response[key]);
             }
             setStored(dataFromDb);
         })
     }, []);
     */
+    
 
+/* GETTING DATA WITH AXIOS */   // Did not use because data from the URL kept renewing, worked with other URL, used 'https://fakestoreapi.com/products'
+    /*
+    useEffect(() => {
+      axios.get(dbUrl)
+      .then((response) => {
+        setStored(response)
+      })
+    })
+    */
+    
     function deleteRow(selectedRow) {
-        setStored(shipmentsData);
-        const index = shipmentsData.findIndex(element => element.orderNo === selectedRow.orderNo);
-        shipmentsData.splice(index,1);
+        const index = stored.findIndex(element => element.orderNo === selectedRow.orderNo);
+        stored.splice(index,1);
         setStored(stored.slice());
     }
     
@@ -83,7 +76,12 @@ function TableData() {
                         status = {element.status}
                         consignee = {element.consignee}
                         />
-                        <IconButton aria-label='Search database' icon={<DeleteIcon />} onClick={() => deleteRow(element)} variant='outline' colorScheme='red'></IconButton>
+                        <IconButton aria-label='Search database'
+                        onClick={() => deleteRow(element)}
+                        icon={<DeleteIcon />} 
+                        variant='outline' 
+                        colorScheme='red'
+                        />
                     </Td>
                 </Tr>)}
             </Tbody>

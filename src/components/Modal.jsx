@@ -1,4 +1,4 @@
-import { useDisclosure, useEditableControls, Spacer } from '@chakra-ui/react'
+import { useDisclosure, useEditableControls } from '@chakra-ui/react'
 import React from 'react'
 import {
     Button,
@@ -37,7 +37,7 @@ function ModalWindow(props) {
         } = useEditableControls()
 
         return isEditing ? (
-            <ButtonGroup size='sm'>
+            <ButtonGroup marginTop='.2rem' size='sm'>
               <IconButton aria-label='Search database' icon={<CheckIcon />} {...getSubmitButtonProps()} />
               <IconButton aria-label='Search database' icon={<CloseIcon />} {...getCancelButtonProps()} />
             </ButtonGroup>
@@ -54,12 +54,11 @@ function ModalWindow(props) {
         <ModalOverlay />
         <ModalContent width='1000px'>
           <ModalHeader>{props.orderNo}
-            
-          </ModalHeader>
+          </ModalHeader> 
           <ModalCloseButton />
-          <ModalBody>                           {/* Fields can be edited in the UI, but the values are not saved */}
-            <div className="shipment-details"> 
-                <div className="field"><label>Order Number</label> 
+          <ModalBody>                           
+            <div className="shipment-details">  {/* Fields can be edited in the UI, but the values are not saved */}
+                <div className="field"><label>Order Number</label>
                     <Editable
                         padding='.2rem'
                         fontWeight='bold'
@@ -67,7 +66,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>
@@ -81,7 +79,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>                
@@ -95,7 +92,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>
@@ -109,7 +105,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>
@@ -123,7 +118,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>
@@ -137,7 +131,6 @@ function ModalWindow(props) {
                         isPreviewFocusable={false}
                     >
                     <EditablePreview />
-                    {/* Here is the custom input */}
                     <Input as={EditableInput} />
                     <EditableControls />
                     </Editable>
@@ -146,10 +139,8 @@ function ModalWindow(props) {
             <div>
             </div>
           </ModalBody>
-
-          <ModalFooter id="modalfoot">
-            
-            <Button colorScheme='blackAlpha' onClick={onClose}>Close</Button>
+          <ModalFooter id="modalfoot"> 
+            <Button colorScheme='gray' onClick={onClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

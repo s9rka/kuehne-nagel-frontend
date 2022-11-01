@@ -1,7 +1,6 @@
 import './App.css';
-import Table from './Table';
+import Table from './components/Table';
 import { Routes, Route } from 'react-router-dom';
-import EditData from './Edit';
 
 
 function App() {
